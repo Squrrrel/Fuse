@@ -1,72 +1,100 @@
-<!doctype html>
 <html>
-<head>
-<title>unquote</title>
-<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-<script src="bower_components/platform/platform.js"></script>
-<link rel="import" href="bower_components/font-roboto/roboto.html">
-<link rel="import"
-href="bower_components/core-header-panel/core-header-panel.html">
-<link rel="import"
-href="bower_components/core-toolbar/core-toolbar.html">
-<link rel="import"
-href="bower_components/paper-tabs/paper-tabs.html">
-<link rel="import" href="html/post-list.html">
-<style>
-html,body {
-height: 100%;
-margin: 0;
-background-color: #E5E5E5;
-font-family: 'RobotoDraft', sans-serif;
-}
-core-header-panel {
-height: 100%;
-overflow: auto;
--webkit-overflow-scrolling: touch;
-}
-core-toolbar {
-background: #03a9f4;
-color: white;
-}
-#tabs {
-width: 100%;
-margin: 0;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
-}
-.container {
-width: 80%;
-margin: 50px auto;
-}
-@media (min-width: 481px) {
-#tabs {
-width: 200px;
-}
-.container {
-width: 400px;
-}
-}
-</style>
-</head>
-<body unresolved touch-action="auto">
-<core-header-panel>
-<core-toolbar>
-<paper-tabs id="tabs" selected="all" self-end>
-<paper-tab name="all">ALL</paper-tab>
-<paper-tab name="favorites">FAVORITES</paper-tab>
-</paper-tabs>
-</core-toolbar>
-<div class="container" layout vertical center>
-<post-list show="all"></post-list>
-</div>
-</core-header-panel>
-<script>
-var tabs = document.querySelector('paper-tabs');
-tabs.addEventListener('core-select', function() {
-console.log("Selected: " + tabs.selected);
-});
-</script>
-</body>
+  <head>
+    <title>Fuse</title>
+    <script src="components/platform/platform.js"></script>
+    <link rel="import" href="components/paper-tabs/paper-tabs.html">
+    <link rel="import" href="components/paper-button/paper-button.html">
+    <link rel="import" href="components/font-roboto/roboto.html">
+    <link rel="import" href="components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="components/core-pages/core-pages.html">
+    <!-- Custom Font Imports -->
+    <link rel="stylesheet" type="text/css" href="fonts/quicksand/quicksand.css">
+    <!-- Custom Elements Imports -->
+    <link rel="import" href="components/custom-elements/home/home.html">
+    <link rel="import" href="components/custom-elements/myaccount/myaccount.html">
+    <link rel="import" href="components/custom-elements/projects/projects.html">
+    <link rel="import" href="components/custom-elements/downloads/download.html">
+    <link rel="import" href="components/custom-elements/help/help.html">
+    <link rel="import" href="components/custom-elements/contact/contact.html">
+    <style>
+    body, html {
+      padding: 0;
+      margin: 0;
+    }
+    paper-tab::shadow #ink {
+      color: #78a2f8;
+    }
+    paper-tabs::shadow #selectionBar {
+      background-color: #78a2f8;
+      height: 2px;
+      color: black;
+    }
+    paper-tabs {
+      background-color: white;
+      font-family: 'Roboto Condensed', 'Helvetica', 'Arial', sans-serif;  
+      font-weight: 300;
+      font-size: 19px;
+    }
+    </style>
+  </head>
+  <body>
+  <core-drawer-panel>
+    <paper-tabs selected="0">
+      <paper-tab class="home" on-tap="{{home}}">Home</paper-tab>
+      <paper-tab class="myaccount" on-tap="{{myaccount}}">My Account</paper-tab>
+      <paper-tab class="projects" on-tap="{{projects}}">Projects</paper-tab>
+      <paper-tab class="downloads" on-tap="{{downloads}}">Downloads</paper-tab>
+      <paper-tab class="help" on-tap="{{help}}">Help</paper-tab>
+      <paper-tab class="contact" on-tap="{{contact}}">Contact</paper-tab>
+    </paper-tabs>
+    <core-pages selected="0">
+      <div><fuse-home></fuse-home></div>
+      <div main><fuse-myaccount></fuse-myaccount></div>
+      <div><fuse-projects></fuse-projects></div>
+      <div><fuse-downloads></fuse-downloads></div>
+      <div><fuse-help></fuse-help></div>
+      <div><fuse-contact></fuse-contact></div>
+    </core-pages>
+    </core-drawer-panel>
+  </body>
+  <script>
+    var tabs = {
+      one: document.querySelector('.home'),
+      two: document.querySelector('.myaccount'),
+      three: document.querySelector('.projects'),
+      four: document.querySelector('.downloads'),
+      five: document.querySelector('.help'),
+      six: document.querySelector('.contact')
+    };
+    tabs.one.addEventListener('click', function(e) {
+      console.log(e.type + ' : ' + this.localName + ' .home.');
+      window.location.href = "#home";
+    });
+    tabs.two.addEventListener('click', function(e) {
+      console.log(e.type + ' : ' + this.localName + ' .myaccount.');
+      window.location.href = "#myaccount";
+    });
+    tabs.three.addEventListener('click', function(e) {
+      console.log(e.type + ' : ' + this.localName + ' .projects');
+      window.location.href = "#projects";
+    });
+    tabs.four.addEventListener('click', function(e) {
+      console.log(e.type + ' : ' + this.localName + ' .downloads.');
+      window.location.href = "#downloads";
+      });
+    tabs.five.addEventListener('click', function(e) {
+      console.log(e.type + ' : ' + this.localName + ' .help.');
+      window.location.href  = "#help";
+    });
+    tabs.six.addEventListener('click', function(e) {
+      console.log(e.type + ' : ' + this.localName + ' .contact.');
+      window.location.href = "#contact";
+    });
+    var tab = document.querySelector('paper-tabs');
+    var page = document.querySelector('core-pages');
+
+    tab.addEventListener('core-select',function(){
+    page.selected = tab.selected;
+    });
+  </script>
 </html>
