@@ -1,0 +1,30 @@
+@font-face {
+  font-family: Quicksand;
+  src: url('Quicksand-Regular.ttf') format("truetype");
+  url: ('Quicksand-Regular.ttf') format("truetype");
+}
+@font-face {
+  font-family: Quicksand-LightItalic;
+  src: url('Quicksand-LightItalic.ttf') format("truetype");
+  url: ('Quicksand-LighItalic.ttf') format("truetype");
+}
+@font-face {
+  font-family: Quicksand-Light;
+  src: url('Quicksand-Light.ttf') format("truetype");
+  url: ('Quicksand-Light.ttf') format("truetype");
+}
+@font-face {
+  font-family: Quicksand-Italic;
+  src: url('Quicksand-Italic.ttf') format("truetype");
+  url: ('Quicksand-Italic.ttf') format("truetype");
+}
+@font-face {
+  font-family: Quicksand-BoldItalic;
+  src: url('Quicksand-BoldItalic.ttf') format("truetype");
+  url: ('Quicksand-BoldItalic.ttf') format("truetype")
+}
+@font-face {
+  font-family: Quicksand-Bold;
+  src: url('Quicksand-Bold.ttf') format("truetype");
+  url: ('Quicksand-Bold.ttf') format("truetype");
+}
