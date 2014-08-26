@@ -9,6 +9,12 @@
     <div id="download-button">
       <center><core-icon-button icon="file-download" onclick="downloadFuse();">Download</core-icon-button></center>
     </div>
+    <div id="info">
+    <center><p>only current download is for Android. Released for other platforms coming soon!</p></center>
+    </div>
+        <div id="vog">
+          <core-icon-button icon="launch" onClick="vog();">View on GitHub</core-icon-button>
+        </div>
     <style>
       :host {
         font-family: Quicksand;
@@ -31,6 +37,7 @@
         transform: translateY(-30%);
         -webkit-transform: translateY(-30%);
         -ms-transform: translateY(-30%);
+        outline: solid #3592dd 0.5px;
       }
       core-icon-button {
         width: 25%;
@@ -41,6 +48,18 @@
         font-size: 28pt;
         border: solid #3592dd 0.5px;
       }
+      #info {
+        position: relative;
+        top: 74.6%;
+        transform: translateY(-74.6%);
+        font-size: 14pt;
+      }
+          #vog {
+      position: absolute;
+      top: 95%;
+      transform: translateY(-95%);
+      width: 737;
+    }
     </style>
     <script>
       Polymer('ce-download',  {
@@ -55,6 +74,9 @@
         } else {
           alert('Please allow popups for this site.')
         }
+      }
+      function vog() {
+        window.open('https://www.Github.com/Squrrrel/Fuse/', '_blank');
       }
     </script>
   </template>
