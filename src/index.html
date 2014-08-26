@@ -1,246 +1,76 @@
 <html>
   <head>
-    <title>Fuse</title>
+   <title>Fuse</title>
     <script src="components/platform/platform.js"></script>
-    <link rel="import" href="components/core-icon-button/core-icon-button.html">
+    <link rel="import" href="components/paper-tabs/paper-tabs.html">
+    <link rel="import" href="components/paper-button/paper-button.html">
     <link rel="import" href="components/font-roboto/roboto.html">
-  </head>
-  <body>
-    <div class="header">
-      <h1>Fuse</h1>
-    </div>
-    <div class="download">
-      <center>
-      <core-icon-button icon="file-download" id="windows"> Download for Windows</core-icon-button><br>
-      <core-icon-button icon="file-download" id="mac"> Download for Mac</core-icon-button><br>
-      <core-icon-button icon="file-download" id="UNIX"> Download for UNIX</core-icon-button><br>
-      <core-icon-button icon="file-download" id="android"> Download for Android</core-icon-button><br>
-      <core-icon-button icon="file-download" id="idevice"> Download for iDevice's</core-icon-button><br>
-      </center>
-    </div>
-  </body>
+    <link rel="import" href="components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="components/core-pages/core-pages.html">
+    <link rel="import" href="components/core-meta/core-meta.html">
+    <!-- Custom Font Imports -->
+    <link rel="stylesheet" type="text/css" href="fonts/quicksand/quicksand.css">
+    <!-- Custom Pages Imports -->
+    <link rel="import" href="pages/html/fuse/fuse.html">
+    <link rel="import" href="pages/html/download/download.html">
   <style>
     html, body {
-      background: #3592dd;
-      /**
-      font-family: "Segoe WP", "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
-      **/
-      font-family: 'RobotoDraft', sans-serif;
-    }
-    core-icon-button {
-      color: white;
-      background: #71bc22;
-      text-align: center;
-      width: 320;
-      
-        
-  -webkit-transition: all 0.2s ease-in-out 0s;
-  -moz-transition: all 0.2s ease-in-out 0s;
-  transition: all 0.2s ease-in-out 0s;
-    }
-    core-icon-button:hover {
-      background: #79cd22;
-    }
-<<<<<<< HEAD
-    core-icon-button:active {
-      background: #79cd22;
-=======
-    paper-tabs {
       background-color: white;
-      font-family: Quicksand;
-      font-weight: 300;
-      font-size: 25px;
->>>>>>> origin/master
+      padding: 0;
+      margin: 0;
     }
-    .header {
-      text-align: center;
+    #tabs {
+      background-color: white;
+      width: 100%;
+    }
+    paper-tab::shadow #ink {
+      width: 100%;
+      color: #3592dd;
+    }
+    paper-tabs::shadow #selectionBar {
+      background-color: #3592dd;
+      height: 2px;
       color: white;
-      font-family: 'RobotoDraft', sans-serif;
     }
-    h1 {
-      font-family: 'RobotoDraft', sans-serif;
+    paper-tabs {
+      color: #3592dd;
+      font-family: Quicksand;
+      font-size: 18pt;
+    }
+    core-drawer-panel {
+      width: 100%;
+      height: 100%;
     }
   </style>
+  </head>
+  <body>
+    <core-drawer-panel>
+      <paper-tabs selected="0">
+        <paper-tab class="fuse" on-tap="{{fuse}}">Fuse</paper-tab>
+        <paper-tab class="download" on-tap="{{download}}">Download</paper-tab>
+      </paper-tabs>
+    <core-pages selected="0">
+        <div id="fuse"><element-fuse></element-fuse></div>
+        <div id="download"><element-download></element-download></div>
+      </core-pages>
+    </core-drawer-panel>
+  </body>
   <script>
-(function (window) {
-    {
-        var unknown = '-';
+      var tabs = {
+      one: document.querySelector('.fuse'),
+      two: document.querySelector('.download'),
+    };
+    tabs.one.addEventListener('click', function(e) {
+      console.log(e.type + ' : ' + this.localName + ' .fuse.');
+    });
+    tabs.two.addEventListener('click', function(e) {
+      console.log(e.type + ' : ' + this.localName + ' .download.');
+    });
+    var tab = document.querySelector('paper-tabs');
+    var page = document.querySelector('core-pages');
 
-        // screen
-        var screenSize = '';
-        if (screen.width) {
-            width = (screen.width) ? screen.width : '';
-            height = (screen.height) ? screen.height : '';
-            screenSize += '' + width + " x " + height;
-        }
-
-        //browser
-        var nVer = navigator.appVersion;
-        var nAgt = navigator.userAgent;
-        var browser = navigator.appName;
-        var version = '' + parseFloat(navigator.appVersion);
-        var majorVersion = parseInt(navigator.appVersion, 10);
-        var nameOffset, verOffset, ix;
-
-        // Opera
-        if ((verOffset = nAgt.indexOf('Opera')) != -1) {
-            browser = 'Opera';
-            version = nAgt.substring(verOffset + 6);
-            if ((verOffset = nAgt.indexOf('Version')) != -1) {
-                version = nAgt.substring(verOffset + 8);
-            }
-        }
-        // MSIE
-        else if ((verOffset = nAgt.indexOf('MSIE')) != -1) {
-            browser = 'Microsoft Internet Explorer';
-            version = nAgt.substring(verOffset + 5);
-        }
-        // Chrome
-        else if ((verOffset = nAgt.indexOf('Chrome')) != -1) {
-            browser = 'Chrome';
-            version = nAgt.substring(verOffset + 7);
-        }
-        // Safari
-        else if ((verOffset = nAgt.indexOf('Safari')) != -1) {
-            browser = 'Safari';
-            version = nAgt.substring(verOffset + 7);
-            if ((verOffset = nAgt.indexOf('Version')) != -1) {
-                version = nAgt.substring(verOffset + 8);
-            }
-        }
-        // Firefox
-        else if ((verOffset = nAgt.indexOf('Firefox')) != -1) {
-            browser = 'Firefox';
-            version = nAgt.substring(verOffset + 8);
-        }
-        // MSIE 11+
-        else if (nAgt.indexOf('Trident/') != -1) {
-            browser = 'Microsoft Internet Explorer';
-            version = nAgt.substring(nAgt.indexOf('rv:') + 3);
-        }
-        // Other browsers
-        else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) < (verOffset = nAgt.lastIndexOf('/'))) {
-            browser = nAgt.substring(nameOffset, verOffset);
-            version = nAgt.substring(verOffset + 1);
-            if (browser.toLowerCase() == browser.toUpperCase()) {
-                browser = navigator.appName;
-            }
-        }
-        // trim the version string
-        if ((ix = version.indexOf(';')) != -1) version = version.substring(0, ix);
-        if ((ix = version.indexOf(' ')) != -1) version = version.substring(0, ix);
-        if ((ix = version.indexOf(')')) != -1) version = version.substring(0, ix);
-
-        majorVersion = parseInt('' + version, 10);
-        if (isNaN(majorVersion)) {
-            version = '' + parseFloat(navigator.appVersion);
-            majorVersion = parseInt(navigator.appVersion, 10);
-        }
-
-        // mobile version
-        var mobile = /Mobile|mini|Fennec|Android|iP(ad|od|hone)/.test(nVer);
-
-        // cookie
-        var cookieEnabled = (navigator.cookieEnabled) ? true : false;
-
-        if (typeof navigator.cookieEnabled == 'undefined' && !cookieEnabled) {
-            document.cookie = 'testcookie';
-            cookieEnabled = (document.cookie.indexOf('testcookie') != -1) ? true : false;
-        }
-
-        // system
-        var os = unknown;
-        var clientStrings = [
-            {s:'Windows 3.11', r:/Win16/},
-            {s:'Windows 95', r:/(Windows 95|Win95|Windows_95)/},
-            {s:'Windows ME', r:/(Win 9x 4.90|Windows ME)/},
-            {s:'Windows 98', r:/(Windows 98|Win98)/},
-            {s:'Windows CE', r:/Windows CE/},
-            {s:'Windows 2000', r:/(Windows NT 5.0|Windows 2000)/},
-            {s:'Windows XP', r:/(Windows NT 5.1|Windows XP)/},
-            {s:'Windows Server 2003', r:/Windows NT 5.2/},
-            {s:'Windows Vista', r:/Windows NT 6.0/},
-            {s:'Windows 7', r:/(Windows 7|Windows NT 6.1)/},
-            {s:'Windows 8.1', r:/(Windows 8.1|Windows NT 6.3)/},
-            {s:'Windows 8', r:/(Windows 8|Windows NT 6.2)/},
-            {s:'Windows NT 4.0', r:/(Windows NT 4.0|WinNT4.0|WinNT|Windows NT)/},
-            {s:'Windows ME', r:/Windows ME/},
-            {s:'Android', r:/Android/},
-            {s:'Open BSD', r:/OpenBSD/},
-            {s:'Sun OS', r:/SunOS/},
-            {s:'Linux', r:/(Linux|X11)/},
-            {s:'iOS', r:/(iPhone|iPad|iPod)/},
-            {s:'Mac OS X', r:/Mac OS X/},
-            {s:'Mac OS', r:/(MacPPC|MacIntel|Mac_PowerPC|Macintosh)/},
-            {s:'QNX', r:/QNX/},
-            {s:'UNIX', r:/UNIX/},
-            {s:'BeOS', r:/BeOS/},
-            {s:'OS/2', r:/OS\/2/},
-            {s:'Search Bot', r:/(nuhk|Googlebot|Yammybot|Openbot|Slurp|MSNBot|Ask Jeeves\/Teoma|ia_archiver)/}
-        ];
-        for (var id in clientStrings) {
-            var cs = clientStrings[id];
-            if (cs.r.test(nAgt)) {
-                os = cs.s;
-                break;
-            }
-        }
-
-        var osVersion = unknown;
-
-        if (/Windows/.test(os)) {
-            osVersion = /Windows (.*)/.exec(os)[1];
-            os = 'Windows';
-        }
-
-        switch (os) {
-            case 'Mac OS X':
-                osVersion = /Mac OS X (10[\.\_\d]+)/.exec(nAgt)[1];
-                break;
-
-            case 'Android':
-                osVersion = /Android ([\.\_\d]+)/.exec(nAgt)[1];
-                break;
-
-            case 'iOS':
-                osVersion = /OS (\d+)_(\d+)_?(\d+)?/.exec(nVer);
-                osVersion = osVersion[1] + '.' + osVersion[2] + '.' + (osVersion[3] | 0);
-                break;
-        }
-        
-        // flash (you'll need to include swfobject)
-        /* script src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js" */
-        var flashVersion = 'no check';
-        if (typeof swfobject != 'undefined') {
-            var fv = swfobject.getFlashPlayerVersion();
-            if (fv.major > 0) {
-                flashVersion = fv.major + '.' + fv.minor + ' r' + fv.release;
-            }
-            else  {
-                flashVersion = unknown;
-            }
-        }
-    }
-
-    window.jscd = {
-        screen: screenSize,
-        browser: browser,
-        browserVersion: version,
-        mobile: mobile,
-        os: os,
-        osVersion: osVersion,
-        cookies: cookieEnabled,
-        flashVersion: flashVersion
-      };
-    }(this));
-
-    console.log(
-      'OS: ' + jscd.os +' '+ jscd.osVersion + '\n'+
-      'Browser: ' + jscd.browser +' '+ jscd.browserVersion + '\n' + 
-      'Mobile: ' + jscd.mobile + '\n' +
-      'Flash: ' + jscd.flashVersion + '\n' +
-      'Cookies: ' + jscd.cookies + '\n' +
-      'Screen Size: ' + jscd.screen
-    ); 
-   </script>
+    tab.addEventListener('core-select',function(){
+    page.selected = tab.selected;
+    });
+</script>
 </html>
