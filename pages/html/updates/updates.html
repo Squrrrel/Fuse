@@ -1,0 +1,53 @@
+<link rel="import" href="../../../components/polymer/polymer.html">
+
+<polymer-element name="ce-updates" noscript>
+  <template>
+  <center>
+  <div id="content">
+    <h1>26th August 2014</h1>
+    <p> - Added updates tab to website.</p>
+    <p> - Added fuse.html file to index.html</p>
+    <p> - Styled fuse.html into index.html</p>
+    <p> - Added support for android devices.</p>
+    <p> - Added 'View on Github' button on every page in the bottom left corner.</p>
+  </div>
+  </center>
+      <div id="last-updated">
+      <pre>Last Updated: 26th August 2014 11:18pm</pre>
+    </div>
+          <div id="vog">
+          <core-icon-button icon="launch" onClick="vog();">View on GitHub</core-icon-button>
+        </div>
+  <style>
+    :host {
+      background: white;
+      font-family: Quicksand;
+      position: fixed;
+      height: 100%;
+      width: 100%;
+    }
+    #last-updated {
+      position: absolute;
+      top: 92.5%;
+      transform: transformY(-92.5%);
+      left: 42.5%;
+      transform: transformX(-42.5%);
+      border-top: solid #5392dd 1px;
+    }
+        #vog {
+      position: absolute;
+      top: 95%;
+      transform: translateY(-95%);
+    }
+          core-icon-button:hover {
+        background-color: #3592dd;
+        color: white;
+      }
+  </style>
+  <script>
+      function vog() {
+        window.open('https://www.Github.com/Squrrrel/Fuse/', '_blank');
+      }
+  </script>
+  </template>
+</polymer-element>
