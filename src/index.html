@@ -10,7 +10,7 @@
     <link rel="import" href="components/core-meta/core-meta.html">
     <!-- Custom Font Imports -->
     <link rel="stylesheet" type="text/css" href="fonts/quicksand/quicksand.css">
-    <!-- Custom Pages Imports -->
+    <!-- Custom Element Imports -->
     <link rel="import" href="pages/html/fuse/fuse.html">
     <link rel="import" href="pages/html/download/download.html">
   <style>
@@ -50,9 +50,9 @@
         <paper-tab class="download" on-tap="{{download}}">Download</paper-tab>
       </paper-tabs>
     <core-pages selected="0">
-        <div id="fuse"><element-fuse></element-fuse></div>
-        <div id="download"><element-download></element-download></div>
-      </core-pages>
+      <div><ce-fuse></ce-fuse></div>
+      <div><ce-download></ce-download></div>
+    </core-pages>
     </core-drawer-panel>
   </body>
   <script>

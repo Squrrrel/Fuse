@@ -1,0 +1,61 @@
+<link rel="import" href="../../../components/polymer/polymer.html">
+<link rel="import" href="../../../components/core-icon-button/core-icon-button.html">
+
+<polymer-element name="ce-download" noscript>
+  <template>
+    <div id="heading">
+      <center><p>Download Fuse</p></center>
+    </div>
+    <div id="download-button">
+      <center><core-icon-button icon="file-download" onclick="downloadFuse();">Download</core-icon-button></center>
+    </div>
+    <style>
+      :host {
+        font-family: Quicksand;
+        font-size: 12pt;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+      }
+      core-icon-button:hover {
+        background-color: #3592dd;
+        color: white;
+      }
+      core-icon-button:activated {
+        background-color: #069;
+        color: white;
+      }
+      #download-button {
+        position: relative;
+        top: 30%;
+        transform: translateY(-30%);
+        -webkit-transform: translateY(-30%);
+        -ms-transform: translateY(-30%);
+      }
+      core-icon-button {
+        width: 25%;
+      }
+      #heading {
+        position: relative;
+        font-family: Quicksand;
+        font-size: 28pt;
+        border: solid #3592dd 0.5px;
+      }
+    </style>
+    <script>
+      Polymer('ce-download',  {
+        ready: function() {
+          this.download = downloadFuse();
+        }
+      });
+      function downloadFuse() {
+        var win = window.open('http://play.google.com/', '_blank');
+        if(win) {
+          win.focus();
+        } else {
+          alert('Please allow popups for this site.')
+        }
+      }
+    </script>
+  </template>
+</polymer-element>
